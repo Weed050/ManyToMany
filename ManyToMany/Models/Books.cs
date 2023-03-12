@@ -4,6 +4,7 @@
     {
         public int BooksID { get; set; }
         public int BookName { get; set; }
-        public List<BooksAndAuthors> BooksAndAuthors { get; set; } = new List<BooksAndAuthors>();
+        public List<Author> Author { get; set; }
+        //public List<BooksAndAuthors> BooksAndAuthors { get; set; } = new List<BooksAndAuthors>();
     }
 }

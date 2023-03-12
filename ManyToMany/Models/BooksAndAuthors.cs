@@ -6,5 +6,6 @@
         public int BooksID { get; set; }
         public Author Author { get; set; }
         public int AuthorID { get; set; }
+        public DateTime AddingTime { get; set; }
     }
 }
