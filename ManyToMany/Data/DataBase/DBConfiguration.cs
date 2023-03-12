@@ -14,16 +14,16 @@ namespace ManyToMany.Data.DataBase
             builder.Property(x => x.AuthorID);
             builder.Property(x => x.AuthorName);
 
-            builder.HasMany(x => x.Books)
-                .WithMany(x => x.Author)
-                .UsingEntity<BooksAndAuthors>(
-                //o => o.HasOne(x => x.Author).WithMany().HasForeignKey(x => x.AuthorID),
-                o => o.HasOne(y => y.Books).WithMany().HasForeignKey(y => y.BooksID),
-                o => {
-                    o.HasKey(z => new { z.AuthorID, z.BooksID });
-                    o.Property(x => x.AddingTime).HasDefaultValueSql("gerutcdate()");
-                    }
-                ) ;
+            builder.HasMany(b => b.Books)
+                .WithMany(b => b.Author)
+                .UsingEntity<BooksAndAuthors>( 
+               o => o.HasOne(y => y.Books).WithMany().HasForeignKey(y => y.BooksID),
+               o => o.HasOne(x => x.Author).WithMany().HasForeignKey(x => x.AuthorID),
+               o => {
+                   o.HasKey(z => new { z.AuthorID, z.BooksID });
+                   o.Property(x => x.AddingTime).HasDefaultValueSql("gerutcdate()");
+               }
+               );
         }
     }
     public class BooksConfiguration : IEntityTypeConfiguration<Books>
@@ -48,8 +48,7 @@ namespace ManyToMany.Data.DataBase
             builder.HasKey(x => new {x.AuthorID,x.BooksID});
             builder.Property(x => x.BooksID);
             builder.Property(x => x.AuthorID);
-            builder.Property(x => x.AddingTime).HasDefaultValueSql("getutcdate()");
-
+            builder.Property(x => x.AddingTime);
         }
 
     }
