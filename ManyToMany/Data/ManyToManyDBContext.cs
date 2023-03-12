@@ -14,7 +14,8 @@ namespace ManyToMany.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.ApplyConfiguration();
             //modelBuilder.Entity<Books>(o =>
             //{
             //    o.ToTable("Books", "Library");
