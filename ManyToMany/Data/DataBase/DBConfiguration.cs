@@ -21,7 +21,7 @@ namespace ManyToMany.Data.DataBase
                o => o.HasOne(x => x.Author).WithMany().HasForeignKey(x => x.AuthorID),
                o => {
                    o.HasKey(z => new { z.AuthorID, z.BooksID });
-                   o.Property(x => x.AddingTime).HasDefaultValueSql("gerutcdate()");
+                   o.Property(x => x.AddingTime).HasDefaultValueSql("CURRENT_TIMESTAMP");
                }
                );
         }
