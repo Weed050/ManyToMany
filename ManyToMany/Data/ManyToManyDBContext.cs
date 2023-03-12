@@ -1,4 +1,5 @@
-﻿using ManyToMany.Models;
+﻿using ManyToMany.Data.DataBase;
+using ManyToMany.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,7 +16,9 @@ namespace ManyToMany.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.ApplyConfiguration();
+            modelBuilder.ApplyConfiguration(new AuthorConfiguration());
+            modelBuilder.ApplyConfiguration(new BooksAndAuthorConfiguration());
+            modelBuilder.ApplyConfiguration(new BooksConfiguration());
             //modelBuilder.Entity<Books>(o =>
             //{
             //    o.ToTable("Books", "Library");
