@@ -1,5 +1,6 @@
 ﻿using ManyToMany.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ManyToMany.Data
 {
@@ -13,8 +14,30 @@ namespace ManyToMany.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            //modelBuilder.ApplyConfiguration();
+            modelBuilder.Entity<Books>(o =>
+            {
+                o.ToTable("Books", "Library");
+                o.HasKey(x => x.BooksID);
+                o.Property(x => x.BooksID);
+                o.Property(x => x.BookName);
+            });
+            modelBuilder.Entity<Author>(o =>
+            {
+                o.ToTable("Author", "Library");
+                o.HasKey(x => x.AuthorID);
+                o.Property(x => x.AuthorID);
+                o.Property(x => x.AuthorName);
+            });
+            modelBuilder.Entity<BooksAndAuthors>(o =>
+            {
+                o.ToTable("BooksAndAuthors", "Library");
+                o.Property(x => x.BooksID);
+                o.Property(x => x.AuthorID);
+            });
+            modelBuilder.Entity<BooksAndAuthors>()
+                .HasKey(x => new {x.AuthorID,x.BooksID});
         }
+
+    
     }
 }
