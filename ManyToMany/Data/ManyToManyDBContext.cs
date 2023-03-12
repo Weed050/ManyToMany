@@ -27,6 +27,8 @@ namespace ManyToMany.Data
                 o.HasKey(x => x.AuthorID);
                 o.Property(x => x.AuthorID);
                 o.Property(x => x.AuthorName);
+                o.HasMany(x => x.Books)
+                .WithMany(t => t.Author);
             });
             modelBuilder.Entity<BooksAndAuthors>(o =>
             {
